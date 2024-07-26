@@ -18,4 +18,4 @@ def process_file(file):
 
 pool = multiprocessing.Pool()
 
-work = pool.map(process_file, [f for file in glob(f"{source_dir}/*.fastq")])
+work = pool.map(process_file, [file for file in glob(f"{source_dir}/*.fastq")])
