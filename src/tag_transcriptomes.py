@@ -22,8 +22,7 @@ for file in glob(f"{source_dir}/*.fasta"):
     records = list(SeqIO.parse(file, "fasta"))
     for record in records:
         record.id = f"{record.id} sample={sample_id} lane={lane}"
-
-    print(records[0].id)
+        global_file[record.id] = record.value
 
 
 
