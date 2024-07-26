@@ -9,7 +9,7 @@ source_dir = "/home/labs/binford/raw_reads"
 out_dir = "/home/labs/binford/raw_reads_fasta"
 
 
-def process_file(file)
+def process_file(file):
     new_filename = file.replace("fastq", "fasta").replace(source_dir, out_dir)
     with open(file, "r") as old_handle, open(new_filename, "w") as new_handle:
         sequences = SeqIO.parse(old_handle, "fastq")
