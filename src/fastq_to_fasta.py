@@ -13,4 +13,4 @@ for file in glob(f"{source_dir}/*.fastq"):
     with open(file, "r") as old_handle, open(new_filename, "w") as new_handle:
         sequences = SeqIO.parse(old_handle, "fastq")
         count = SeqIO.write(sequences, new_handle, "fasta")
-        print(f"extracted {count} sequences from {old_handle.split("/"[-1])}")
+        print(f"extracted {count} sequences from {old_handle.split('/'[-1])}")
