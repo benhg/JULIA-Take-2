@@ -36,7 +36,7 @@ def process_file(file):
     #print(lane, sample_id, special)
 
     with open(file, "r") as old_handle, open(new_filename, "w") as new_handle:
-        sequences = SeqIO.parse(old_handle, "fasta")
+        sequences = list(SeqIO.parse(old_handle, "fasta"))
         for sequence in sequences:
             sequence.id = f"{record.id} sample={sample_id} lane={lane} {special}"
             all_sequences.append(sequence)
