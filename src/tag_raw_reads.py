@@ -75,10 +75,10 @@ def process_file(file):
                 all_sequences.append(sequence)
 
             count = SeqIO.write(all_sequences, new_handle, "fasta")
-            print(f"extracted {count} sequences from {old_handle.split('/'[-1])} into batch {i}")
+            print(f"extracted {count} sequences from {file.split('/'[-1])} into batch {i}")
             new_handle.close()
 
 
-pool = multiprocessing.Pool(2)
+pool = multiprocessing.Pool(48)
 work = pool.map(process_file, [f"{file}" for file in glob(f"{source_dir}/*.fasta")])
 
