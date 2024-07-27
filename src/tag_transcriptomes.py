@@ -42,7 +42,7 @@ def process_file(file):
         sequences = list(SeqIO.parse(old_handle, "fasta"))
         for sequence in sequences:
             print(sequence.id)
-            sequence.id = f"{record.id} sample={sample_id} lane={lane} {special}"
+            sequence.id = f"{sequence.id} sample={sample_id} lane={lane} {special}"
             print(sequence.id)
             all_sequences.append(sequence)
 
