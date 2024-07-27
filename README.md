@@ -11,8 +11,20 @@ We're going to align sequences using [STAR](https://github.com/alexdobin/STAR).
 Currently, we have a set of known transcripts in FASTA format, and a set of raw reads in FASTQ format. We will align the raw reads against the known transcripts using STAR. The specific plan of action is:
 
 1. Add metadata to the sequences in the known transcripts (lane and sample ID)
+    a. This is done with `aggregate_tag_transcriptomes.py`
 2. Convert the FASTQ raw reads to FASTA, and add metadata to the FASTA tags
+    a. This is done with `fastq_to_fasta.py`
 3. Build a genome index from all the transcripts
+    a. This is done with `tag_raw_reads.py`
+    b. This can be assembled into one file with `cat`
 4. Run the STAR mapping step from that output
 
 After we see the output from step 4, we'll decide next steps
+
+## Notes
+
+To execute one of the python scripts on slurm, use "slurm_run.sh" script:
+
+`sbatch --cpus-per-task=48 slurm_run.sh <name of the python script to run>`
+
+This is kind of a hack, to be honest, but whatever. It works.
