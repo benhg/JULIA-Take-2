@@ -54,5 +54,5 @@ def process_file(file):
 
 hostname = socket.gethostname()
 pool = multiprocessing.Pool(16)
-work = pool.map(process_file, [f"{source_dir}/file" for file in files[hostname] ])
+work = pool.map(process_file, [f"{source_dir}/{file}" for file in files[hostname] ])
 
