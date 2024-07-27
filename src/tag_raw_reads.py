@@ -16,7 +16,7 @@ import multiprocessing
 import socket
 
 source_dir = "/home/labs/binford/raw_reads_fasta/"
-dest_dir = "/home/labs/binford/raw_reads_fasta_tagged_new/"
+dest_dir = "/home/labs/binford/raw_reads_fasta_tagged_batched/"
 
 
 def batch_iterator(iterator, batch_size):
@@ -80,5 +80,5 @@ def process_file(file):
 
 
 pool = multiprocessing.Pool(2)
-work = pool.map(process_file, [f"{source_dir}/{file}" for file in glob.glob(f"{source_dir}/*.fasta")])
+work = pool.map(process_file, [f"{source_dir}/{file}" for file in glob(f"{source_dir}/*.fasta")])
 
