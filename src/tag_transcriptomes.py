@@ -26,7 +26,7 @@ def process_file(file):
     elif "lane2" in file:
         lane = "2"
     else:
-        special += file.split("fasta")[0].split("/")[1]
+        special += file.split("fasta")[0].split("/")[-1]
 
     # All files with "laneX" have a sample ID
     if "lane" in new_filename:
