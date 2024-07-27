@@ -21,7 +21,7 @@ def process_file(file):
     sample_id = "N/A"
     if "lane1" in file:
         lane = "1"
-    else if "lane2" in file:
+    elif "lane2" in file:
         lane = "2"
 
     # All files with "laneX" have a sample ID
