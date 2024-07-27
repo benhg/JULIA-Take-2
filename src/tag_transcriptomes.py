@@ -23,7 +23,7 @@ files = {
 
 def process_file(file):
 
-    # Set the limit to (500 GiB/48 processes)
+    print(file)
     all_sequences = []
     new_filename = file.replace(source_dir, dest_dir)
     lane = "N/A"
@@ -54,5 +54,5 @@ def process_file(file):
 
 hostname = socket.gethostname()
 pool = multiprocessing.Pool(16)
-work = pool.map(process_file, [f"{source_dir}/{file}" for file in files[hostname] ])
+work = pool.map(process_file, [f"{source_dir}/{file}" for file in files[hostname]])
 
