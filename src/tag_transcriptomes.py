@@ -26,7 +26,7 @@ def process_file(file):
 
     # All files with "laneX" have a sample ID
     if "lane" in new_filename:
-        sample_id = f"{new_filename.split("-")[1]}_Trinity"
+        sample_id = f"{new_filename.split('-')[1]}_Trinity"
 
     print(lane, sample_id)
 
