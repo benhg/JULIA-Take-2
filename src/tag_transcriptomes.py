@@ -1,4 +1,6 @@
 """
+This file aggregates and tags the known assembled transcriptomes.
+
 Input: A directory containing FASTA files. Each FASTA file's name has a sample ID in it.
 
 Sample IDs 1-11 are from lane 1. Sample IDs 12-22 are from lane 2. 
@@ -8,24 +10,36 @@ Output: A single FASTA file with all the sequences from the directory. Samples a
 
 from Bio import SeqIO
 from glob import glob
+import multiprocessing
 
-source_dir = "/home/labs/binford/Assembled_Untranslated_Transcriptomes"
-output_file = f"{source_dir}/all_assembled_transcriptomes.fasta"
+source_dir = "/home/labs/binford/raw_reads_fasta"
 
-global_file = []
 
-# Merge everything into one big dict
-for file in glob(f"{source_dir}/*.fasta"):
-    sample_id = file.split("/")[-1].split(".fasta")[0]
-    s_num = sample_id.split("s")[-1].split("_")[0]
-    lane = 1 if int(s_num) < 12 else 2
-    print(sample_id, lane)
-    records = list(SeqIO.parse(file, "fasta"))
-    for record in records:
-        # edit ID
-        record.id = f"{record.id} sample={sample_id} lane={lane}"
-        global_file.append(record)
+def process_file(file):
+    new_filename = file
+    lane = "N/A"
+    sample_id = "N/A"
+    if "lane1" in file:
+        lane = "1"
+    else if "lane2" in file:
+        lane = "2"
 
-# Output to a new file
-with open(output_file, "w") as output_handle:
-    SeqIO.write(global_file, output_handle, "fasta")
+    # All files with "laneX" have a sample ID
+    if "lane" in new_filename:
+        sample_id = f"{new_filename.split("-")[1]}_Trinity"
+
+    print(lane, sample_id)
+
+    """
+    with open(file, "r") as old_handle, open(new_filename, "w") as new_handle:
+        sequences = SeqIO.parse(old_handle, "fastq")
+        for sequence in sequences:
+            sequence.id = f"{record.id} sample={sample_id} lane={lane}"
+
+        # count = SeqIO.write(sequences, new_handle, "fasta")
+        print(f"extracted {count} sequences from {old_handle.split('/'[-1])}")
+    """
+
+pool = multiprocessing.Pool()
+work = pool.map(process_file, [file for file in glob(f"{source_dir}/*.fasta")])
+
