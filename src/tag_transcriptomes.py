@@ -41,7 +41,7 @@ def process_file(file):
             sequence.id = f"{record.id} sample={sample_id} lane={lane} {special}"
             all_sequences.append(sequence)
 
-        count = SeqIO.write(sequences, new_handle, "fasta")
+        count = SeqIO.write(all_sequences, new_handle, "fasta")
         print(f"extracted {count} sequences from {old_handle.split('/'[-1])}")
     
 pool = multiprocessing.Pool(8)
