@@ -28,17 +28,13 @@ def process_file(file):
     if "lane" in new_filename:
         sample_id = f"{new_filename.split('-')[1]}_Trinity"
 
-    print(lane, sample_id)
-
-    """
     with open(file, "r") as old_handle, open(new_filename, "w") as new_handle:
         sequences = SeqIO.parse(old_handle, "fastq")
         for sequence in sequences:
             sequence.id = f"{record.id} sample={sample_id} lane={lane}"
 
-        # count = SeqIO.write(sequences, new_handle, "fasta")
+        count = SeqIO.write(sequences, new_handle, "fasta")
         print(f"extracted {count} sequences from {old_handle.split('/'[-1])}")
-    """
 
 pool = multiprocessing.Pool()
 work = pool.map(process_file, [file for file in glob(f"{source_dir}/*.fasta")])
