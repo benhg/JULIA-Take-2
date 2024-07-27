@@ -52,7 +52,7 @@ def process_file(file):
         print(f"extracted {count} sequences from {old_handle.split('/'[-1])}")
 
 
-hostname = socket.gethostname("hostname")
+hostname = socket.gethostname()
 pool = multiprocessing.Pool(16)
 work = pool.map(process_file, [f"{source_dir}/file" for file in files[hostname] ])
 
