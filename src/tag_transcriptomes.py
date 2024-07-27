@@ -13,10 +13,11 @@ from glob import glob
 import multiprocessing
 
 source_dir = "/home/labs/binford/raw_reads_fasta"
+dest_dir = "/home/labs/binford/raw_reads_fasta_tagged"
 
 
 def process_file(file):
-    new_filename = file
+    new_filename = file.replace(source_dir, dest_dir)
     lane = "N/A"
     sample_id = "N/A"
     if "lane1" in file:
