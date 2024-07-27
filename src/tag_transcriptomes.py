@@ -17,6 +17,7 @@ dest_dir = "/home/labs/binford/raw_reads_fasta_tagged"
 
 
 def process_file(file):
+    all_sequences = []
     new_filename = file.replace(source_dir, dest_dir)
     lane = "N/A"
     sample_id = "N/A"
@@ -37,8 +38,8 @@ def process_file(file):
     with open(file, "r") as old_handle, open(new_filename, "w") as new_handle:
         sequences = SeqIO.parse(old_handle, "fasta")
         for sequence in sequences:
-            pass
             sequence.id = f"{record.id} sample={sample_id} lane={lane} {special}"
+            all_sequences.append(sequence)
 
         count = SeqIO.write(sequences, new_handle, "fasta")
         print(f"extracted {count} sequences from {old_handle.split('/'[-1])}")
