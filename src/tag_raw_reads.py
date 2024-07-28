@@ -75,7 +75,7 @@ def process_file(file):
                 all_sequences.append(sequence)
 
             count = SeqIO.write(all_sequences, new_handle, "fasta")
-            print(f"extracted {count} sequences from {file.split('/'[-1])} into batch {i}")
+            print(f"extracted {count} sequences from {file.split('/')[-1]} into batch {i}")
             new_handle.close()
 
 

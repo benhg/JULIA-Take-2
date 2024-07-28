@@ -12,12 +12,14 @@ Currently, we have a set of known transcripts in FASTA format, and a set of raw 
 
 1. Add metadata to the sequences in the known transcripts (lane and sample ID)
     a. This is done with `aggregate_tag_transcriptomes.py`
-2. Convert the FASTQ raw reads to FASTA, and add metadata to the FASTA tags
+2. Convert the FASTQ raw reads to FASTA, and 
     a. This is done with `fastq_to_fasta.py`
-3. Build a genome index from all the transcripts
-    a. This is done with `tag_raw_reads.py`
+3. Add metadata to the FASTA tags
+    a. This is done with `tag_raw_reads.py`. It does it in lots of batches for memory consumption purposes
     b. This can be assembled into one file with `cat`
-4. Run the STAR mapping step from that output
+4. Build a genome index from all the transcripts
+    a. There is an SBATCH script for this: `star_generate_genome_index.sh`
+5. Run the STAR mapping step from that output
 
 After we see the output from step 4, we'll decide next steps
 
