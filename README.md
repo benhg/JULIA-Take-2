@@ -23,6 +23,16 @@ Currently, we have a set of known transcripts in FASTA format, and a set of raw 
 
 After we see the output from step 4, we'll decide next steps
 
+After getting through step 3, step 4 turned out to be problematic. STAR consumes way more memory than it should. Therefore, we're going to proceed with Bowtie2 instead of STAR. After consulting some experts and ourselves, we decided to do this:
+
+1. Create bowtie indexes for:
+    a. The whole set of assembled transcripts
+    b. Just lane 1 transcripts
+    c. Just lane 2 transcripts.
+2. Use Bowtie to run every raw read from lane 1 against lane 1 and every raw read from lane 2 against lane 2
+3. If we run out of memory trying to do step 2, repeat it but only using one sample at a time, to create 22 sets of outputs
+4. Examine the results and decide next steps.
+
 ## Notes
 
 To execute one of the python scripts on slurm, use "slurm_run.sh" script:
