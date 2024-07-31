@@ -33,6 +33,8 @@ After getting through step 3, step 4 turned out to be problematic. STAR consumes
 3. If we run out of memory trying to do step 2, repeat it but only using one sample at a time, to create 22 sets of outputs
 4. Examine the results and decide next steps.
 
+Currently, we are at step 2, and not having memory problems yet.
+
 ## Notes
 
 To execute one of the python scripts on slurm, use "slurm_run.sh" script:
@@ -40,3 +42,48 @@ To execute one of the python scripts on slurm, use "slurm_run.sh" script:
 `sbatch --cpus-per-task=48 slurm_run.sh <name of the python script to run>`
 
 This is kind of a hack, to be honest, but whatever. It works.
+
+## Dataset Descriptions
+
+This section describes all the datasets, specifies where they are stored, and states what we're using them for.
+
+### Assembled Translated Transcriptomes
+
+**Location:** `/home/labs/binford/Assembled_Untranslated_Transcriptomes`
+
+This dataset is a bunch of untranslated RNA transcriptomes of various things including the 22 samples originally sequenced. We are confident about the origin of this data, and we use it as a "golden reference". We build our indices from it and will query against it with other data.
+
+**Files of note:** `all_assembled_transcriptomes.fasta` contains the whole dataset with sequence, lane, and sample IDs attached to each sequence ID as a tag, to make life easier
+
+### Raw Reads
+
+**Location:** `/home/labs/binford/raw_reads`
+
+This data is the raw reads, straight out of the sequencer. It's in FASTQ format, and it has 1 FASTQ file for each sample. There's also some extra FASTQ files that have concatenated data from each sample. 
+
+### Converted/Tagged Raw Reads
+
+**Location:** `/home/labs/binford/raw_reads_fasta_tagged_batched`
+
+This data is the same data as the raw reads, but it's transformed slightly. It's converted to FASTA format, and it has tags added to each sequence ID (lane, sample, species, etc.). We use these as the data for our Bowtie runs.
+
+It's divided into two sections: batched files and combined files. The batched files are sets of 2,000,000 sequences each which have tags added. The combined files have been re-combined from batches.
+
+**Files of note:**
+
+`/home/labs/binford/raw_reads_fasta_tagged_batched/combined_files/lane1_R1.fasta` contains all of the sequences from lane 1 (samples 1-11) in the R1 direction.
+
+`/home/labs/binford/raw_reads_fasta_tagged_batched/combined_files/lane1_R2.fasta` contains all of the sequences from lane 1 (samples 1-11) in the R2 direction.
+
+`/home/labs/binford/raw_reads_fasta_tagged_batched/combined_files/lane2_R1.fasta` contains all of the sequences from lane 2 (samples 12-22) in the R1 direction.
+
+`/home/labs/binford/raw_reads_fasta_tagged_batched/combined_files/lane2_R2.fasta` contains all of the sequences from lane 2 (samples 12-22) in the R2 direction.
+
+### Bowtie Indices
+
+We created bowtie indices from each of the "lanes" (groups of 11 samples that were created with the same lane of the sequencer), as well as one index of all 22 samples. They are in the directories `all_untranslated_transcriptomes_index_lane_1`, `all_untranslated_transcriptomes_index_lane_2`, and `all_untranslated_transcriptomes_index`
+
+### Bowtie output directories
+
+We are collecting the output files for Bowtie runs of lane1 against the lane1 index and lane2 against the lane2 index. the output files are in `/home/labs/binford/lane1_collateral` and `/home/labs/binford/lane2_collateral`, respectively.
+
