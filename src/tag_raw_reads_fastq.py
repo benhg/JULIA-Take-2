@@ -16,7 +16,7 @@ import multiprocessing
 import socket
 
 source_dir = "/home/labs/binford/raw_reads_fasta/"
-dest_dir = "/home/labs/binford/raw_reads_fasta_tagged_batched/"
+dest_dir = "/home/labs/binford/raw_reads_fastq_tagged_batched/"
 
 
 def batch_iterator(iterator, batch_size):
@@ -67,7 +67,7 @@ def process_file(file):
 
         for i, batch in enumerate(batch_iterator(record_iter, 10000000)):
             all_sequences = []
-            batch_filename = f"{new_filename.split(".fasta")[0]}_{i+1}.fasta"
+            batch_filename = f"{new_filename.split('.fasta')[0]}_{i+1}.fasta"
             new_handle = open(batch_filename, "w")
 
             for sequence in batch:
