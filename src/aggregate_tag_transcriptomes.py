@@ -16,6 +16,8 @@ global_file = []
 
 # Merge everything into one big dict
 for file in glob(f"{source_dir}/*.fasta"):
+    if "all_assembled_transcriptomes" in file:
+        pass
     sample_id = file.split("/")[-1].split(".fasta")[0]
     s_num = sample_id.split("s")[-1].split("_")[0]
     lane = 1 if int(s_num) < 12 else 2
