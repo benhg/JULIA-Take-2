@@ -3,7 +3,7 @@ Input: A directory containing FASTA files. Each FASTA file's name has a sample I
 
 Sample IDs 1-11 are from lane 1. Sample IDs 12-22 are from lane 2. 
 
-Output1: A directory of files that has the 
+Output1: A file of all the transcripts with tags added.
 """
 
 from Bio import SeqIO
