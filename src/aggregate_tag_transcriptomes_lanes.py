@@ -32,9 +32,9 @@ for file in glob(f"{source_dir}/*.fasta"):
             print("Unknown lane.......")
 
 # Output to new files
-with open(output_file = f"{source_dir}/all_assembled_transcriptomes_lane_1.fasta", "w") as output_handle:
+with open(f"{source_dir}/all_assembled_transcriptomes_lane_1.fasta", "w") as output_handle:
     SeqIO.write(global_file_lane_1, output_handle, "fasta")
 
-with open(output_file = f"{source_dir}/all_assembled_transcriptomes_lane_2.fasta", "w") as output_handle:
+with open(f"{source_dir}/all_assembled_transcriptomes_lane_2.fasta", "w") as output_handle:
     SeqIO.write(global_file_lane_2, output_handle, "fasta")
 
