@@ -65,7 +65,7 @@ def process_file(file):
     with open(file, "r") as old_handle:
         record_iter = SeqIO.parse(old_handle, "fasta")
 
-        for i, batch in enumerate(batch_iterator(record_iter, 1000000)):
+        for i, batch in enumerate(batch_iterator(record_iter, 2000000)):
             all_sequences = []
             batch_filename = f"{new_filename}_%i.fasta" % (i + 1)
             new_handle = open(batch_filename, "w")
