@@ -16,7 +16,7 @@ import multiprocessing
 import socket
 
 source_dir = "/home/labs/binford/raw_reads_fasta/"
-dest_dir = "/home/labs/binford/raw_reads_fasta_tagged_batched/"
+dest_dir = "/home/labs/binford/raw_reads_fasta_tagged_batched_big/"
 
 
 def batch_iterator(iterator, batch_size):
@@ -43,7 +43,7 @@ def batch_iterator(iterator, batch_size):
 
 def process_file(file):
     """
-    Operate on batches of 10k lines at a time to avoid memory exhaustion
+    Operate on batches of 100k lines at a time to avoid memory exhaustion
     """
     new_filename = file.replace(source_dir, dest_dir)
     lane = "N/A"
@@ -65,7 +65,7 @@ def process_file(file):
     with open(file, "r") as old_handle:
         record_iter = SeqIO.parse(old_handle, "fasta")
 
-        for i, batch in enumerate(batch_iterator(record_iter, 100000)):
+        for i, batch in enumerate(batch_iterator(record_iter, 1000000)):
             all_sequences = []
             batch_filename = f"{new_filename}_%i.fasta" % (i + 1)
             new_handle = open(batch_filename, "w")
