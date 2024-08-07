@@ -25,7 +25,7 @@ for lane in range(1,3):
             index_id = str(i*lane).zfill(3)
             reads_sample_id = str(j*lane).zfill(3)
 
-            dir_1_filename = glob.glob(f"{combined_files_dir}/lane{lane}-s{index_id}*R1*")
+            dir_1_filename = glob(f"{combined_files_dir}/lane{lane}-s{index_id}*R1*")
             print(dir_1_filename) 
             dir_2_filename = dir_1_filename.replace("R1", "R2")
 
