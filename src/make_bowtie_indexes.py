@@ -6,8 +6,7 @@ They'll go into /home/labs/binford/single_sample_indexes/s_{XYZ}/
 
 import subprocess
 
-sbatch_template = """
-#!/bin/bash
+sbatch_template = """#!/bin/bash
 #SBATCH --cpus-per-task=48
 
 mkdir -p /home/labs/binford/single_sample_indexes/s{}
