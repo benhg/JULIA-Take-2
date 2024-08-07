@@ -29,10 +29,10 @@ for lane in range(1,3):
             print(dir_1_filename) 
             dir_2_filename = dir_1_filename.replace("R1", "R2")
 
-            sbatch_text = sbatch_template.format(index_id, index_id, dir_1_filename, dir_2_filename, index_id, index_id, sample_id)
+            sbatch_text = sbatch_template.format(index_id, index_id, dir_1_filename, dir_2_filename, index_id, index_id, reads_sample_id)
             print(dir_1_filename, dir_2_filename, index_id)
-            # with open(f"bowtie_cmds/gen_index_s{sample_id}.sh", "w") as fh:
+            # with open(f"bowtie_cmds/gen_index_{reads_sample_id}_s{reads_sample_id}.sh", "w") as fh:
             #     fh.write(sbatch_text)
-            # print(subprocess.check_output(f"sbatch /home/glick/JULIA-Take-2/src/bowtie_cmds/gen_index_s{sample_id}.sh", shell=True))
+            # print(subprocess.check_output(f"sbatch bowtie_cmds/gen_index_{reads_sample_id}_s{reads_sample_id}.sh", shell=True))
 
 ## Special Cases
