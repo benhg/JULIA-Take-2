@@ -25,9 +25,9 @@ for lane in range(1,3):
 
             if lane == 2:
                 index_id = str(i + 11).zfill(3)
-                reads_sample_id = str(j).zfill(3)
+                reads_sample_id = str(j + 11).zfill(3)
             else:
-                index_id = str(i + 11).zfill(3)
+                index_id = str().zfill(3)
                 reads_sample_id = str(j).zfill(3)
 
             print(reads_sample_id, index_id)
