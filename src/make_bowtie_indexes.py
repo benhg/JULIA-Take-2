@@ -20,4 +20,4 @@ for i in range(1,23):
     sbatch_text = sbatch_template.format(sample_id, sample_id, sample_id, sample_id)
     with open(f"bowtie_cmds/gen_index_s{sample_id}.sh", "w") as fh:
         fh.write(sbatch_text)
-    print(subprocess.check_output(f"sbatch /home/glick/JULIA-Take-2/src/bowtie_cmds/gen_index_s{sample_id}.sh"))
+    print(subprocess.check_output(f"sbatch /home/glick/JULIA-Take-2/src/bowtie_cmds/gen_index_s{sample_id}.sh", shell=True))
