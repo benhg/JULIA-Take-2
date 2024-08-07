@@ -6,6 +6,7 @@ They'll go into /home/labs/binford/single_sample_indexes/s_{XYZ}/
 
 import subprocess
 from glob import glob
+import time
 
 combined_files_dir = "/home/labs/binford/raw_reads_fasta_tagged_batched/combined_files/"
 
