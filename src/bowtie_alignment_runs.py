@@ -17,6 +17,7 @@ bowtie2 -f --threads 48 -x /home/labs/binford/single_sample_indexes/s{}_index/s{
 """
 
 # For each lane
+q = 0
 for lane in range(1,3):
     # For each sample in lane
     for i in range(1,12):
@@ -31,6 +32,7 @@ for lane in range(1,3):
                 reads_sample_id = str(j).zfill(3)
 
             print(reads_sample_id, index_id)
+            q += 1 
 
 
             #print(f"{combined_files_dir}/lane{lane}-s{index_id}*R1*")
@@ -46,3 +48,4 @@ for lane in range(1,3):
             # print(subprocess.check_output(f"sbatch bowtie_cmds/gen_index_{reads_sample_id}_s{reads_sample_id}.sh", shell=True))
 
 ## Special Cases
+print(q)
