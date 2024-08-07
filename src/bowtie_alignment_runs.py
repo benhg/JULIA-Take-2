@@ -60,7 +60,7 @@ with open(f"bowtie_cmds/gen_index_012_001s.sh", "w") as fh:
 
 
 ## S021 against s005 
-dir_1_filename = glob(f"{combined_files_dir}/lane1-s021*R1*")[0]
+dir_1_filename = glob(f"{combined_files_dir}/lane2-s021*R1*")[0]
 dir_2_filename = dir_1_filename.replace("R1", "R2")
 
 sbatch_text = sbatch_template.format("005", "005", dir_1_filename, dir_2_filename, "005", "005", "021")
