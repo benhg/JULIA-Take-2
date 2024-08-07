@@ -9,8 +9,8 @@ import subprocess
 sbatch_template = """#!/bin/bash
 #SBATCH --cpus-per-task=48
 
-mkdir -p /home/labs/binford/single_sample_indexes/s{}
-chmod 777 /home/labs/binford/single_sample_indexes/s{}
+mkdir -p /home/labs/binford/single_sample_indexes/s{}_index
+chmod 777 /home/labs/binford/single_sample_indexes/s{}_index
 
 bowtie2-build --threads 48 --large-index /home/labs/binford/Assembled_Untranslated_Transcriptomes/s{}_Trinity.fasta /home/labs/binford/single_sample_indexes/s{}_index/s{}_index
 """
