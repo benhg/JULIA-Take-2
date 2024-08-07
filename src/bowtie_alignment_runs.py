@@ -28,9 +28,9 @@ for lane in range(1,3):
 
 
             print(f"{combined_files_dir}/lane{lane}-s{index_id}*R1*")
-            dir_1_filename = glob(f"{combined_files_dir}/lane{lane}-s{index_id}*R1*")
+            dir_1_filename = glob(f"{combined_files_dir}/lane{lane}-s{reads_sample_id}*R1*")
             print(dir_1_filename)
-            dir_1_filename = glob(f"{combined_files_dir}/lane{lane}-s{index_id}*R1*")[0]
+            dir_1_filename = glob(f"{combined_files_dir}/lane{lane}-s{reads_sample_id}*R1*")[0]
             dir_2_filename = dir_1_filename.replace("R1", "R2")
 
             sbatch_text = sbatch_template.format(index_id, index_id, dir_1_filename, dir_2_filename, index_id, index_id, reads_sample_id)
