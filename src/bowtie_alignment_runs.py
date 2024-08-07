@@ -22,6 +22,7 @@ for lane in range(1,3):
     for i in range(1,12):
         # For each set of raw reads
         for j in range(1, 12):
+            print(reads_sample_id, index_id)
             index_id = str(i*lane).zfill(3)
             reads_sample_id = str(j*lane).zfill(3)
 
