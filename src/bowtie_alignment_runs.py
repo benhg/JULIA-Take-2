@@ -29,11 +29,11 @@ for lane in range(1,3):
                 index_id = str(i + 11).zfill(3)
                 reads_sample_id = str(j + 11).zfill(3)
             else:
-                index_id = str().zfill(3)
+                index_id = str(i).zfill(3)
                 reads_sample_id = str(j).zfill(3)
 
             print(reads_sample_id, index_id)
-            q += 1 
+            q += 1 l
 
 
             #print(f"{combined_files_dir}/lane{lane}-s{index_id}*R1*")
