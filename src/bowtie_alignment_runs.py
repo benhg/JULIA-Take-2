@@ -33,7 +33,7 @@ for lane in range(1,3):
                 reads_sample_id = str(j).zfill(3)
 
             print(reads_sample_id, index_id)
-            q += 1 l
+            q += 1
 
 
             #print(f"{combined_files_dir}/lane{lane}-s{index_id}*R1*")
@@ -69,3 +69,5 @@ sbatch_text = sbatch_template.format("005", "005", dir_1_filename, dir_2_filenam
 with open(f"bowtie_cmds/gen_index_012_001s.sh", "w") as fh:
     fh.write(sbatch_text)
     print(subprocess.check_output(f"sbatch bowtie_cmds/gen_index_012_001s.sh", shell=True))
+
+print(f"Submitted {q} Jobs")
