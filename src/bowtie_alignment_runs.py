@@ -44,6 +44,7 @@ for lane in range(1,3):
             #print(dir_1_filename, dir_2_filename, index_id)
             with open(f"bowtie_cmds/gen_index_{index_id}_s{reads_sample_id}.sh", "w") as fh:
                 fh.write(sbatch_text)
+            time.sleep(0.1)
             print(subprocess.check_output(f"sbatch bowtie_cmds/gen_index_{reads_sample_id}_s{reads_sample_id}.sh", shell=True))
 
 ## Special Cases
