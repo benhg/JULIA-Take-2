@@ -44,7 +44,7 @@ for lane in range(1,3):
             job_filename = f"bowtie_cmds/unpaired_align_{index_id}_s{reads_sample_id}.sh"
 
             sbatch_text = sbatch_template.format(index_id, reads_sample_id, index_id, index_id, dir_1_filename, index_id, index_id, reads_sample_id)
-            #print(dir_1_filename, dir_2_filename, index_id)
+            print(dir_1_filename, dir_2_filename, index_id, reads_sample_id)
             with open(job_filename, "w") as fh:
                 fh.write(sbatch_text)
             time.sleep(0.1)
@@ -57,7 +57,7 @@ for lane in range(1,3):
 dir_1_filename = glob(f"{combined_files_dir}/lane1-s001*R1*")[0]
 dir_2_filename = dir_1_filename.replace("R1", "R2")
 
-sbatch_text = sbatch_template.format("012", "001",, "012", "012", dir_1_filename, "012", "012", "001")
+sbatch_text = sbatch_template.format("012", "001", "012", "012", dir_1_filename, "012", "012", "001")
 with open(f"bowtie_cmds/gen_index_012_001s.sh", "w") as fh:
     fh.write(sbatch_text)
     print(subprocess.check_output(f"sbatch bowtie_cmds/unpaired_align_012_001s.sh", shell=True))
