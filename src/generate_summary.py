@@ -19,12 +19,12 @@ with open(output_file, "w") as fh:
             data = fh2.readlines()
             # This is gonna be gross
             row = {
-                "index_sample": data[0].split(" ")[0].split("_")[1],
-                "reads_sample": data[0].split(" ")[1].split("_")[1],
-                "num_reads": data[1].split(" ")[0],
-                "num_aligned_none": data[3].split("(")[0].strip(),
-                "num_aligned_once": data[4].split("(")[0].strip(),
-                "num_aligned_multiple": data[5].split("(")[0].strip()
+                "index_sample": int(data[0].split(" ")[0].split("_")[1]),
+                "reads_sample": int(data[0].split(" ")[1].split("_")[1]),
+                "num_reads": int(data[1].split(" ")[0]),
+                "num_aligned_none": int(data[3].split("(")[0].strip()),
+                "num_aligned_once": int(data[4].split("(")[0].strip()),
+                "num_aligned_multiple": int(data[5].split("(")[0].strip())
             }
 
             row["single_alignment_rate"] =  row["num_aligned_once"] / int(row["num_reads"])
