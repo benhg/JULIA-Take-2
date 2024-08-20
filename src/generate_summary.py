@@ -19,8 +19,8 @@ with open(output_file, "w") as fh:
             data = fh2.readlines()
             # This is gonna be gross
             row = {
-                "index_sample": data[0].split(" ")[0].split("_")[1],
-                "reads_sample": data[0].split(" ")[1].split("_")[1],
+                "index_sample": data[0].split(" ")[0].split("_")[1].strip(),
+                "reads_sample": data[0].split(" ")[1].split("_")[1].strip(),
                 "num_reads": int(data[1].split(" ")[0]),
                 "num_aligned_none": int(data[3].split("(")[0].strip()),
                 "num_aligned_once": int(data[4].split("(")[0].strip()),
