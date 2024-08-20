@@ -12,6 +12,10 @@ path = "/home/glick/JULIA-Take-2/src/slurm-*.out"
 output_file = "/home/labs/binford/single_sample_indexes/summary.csv"
 
 with open(output_file, "w") as fh:
+    writer = csv.Writer()
+    writer.writerow(headers)
+
+with open(output_file, "w") as fh:
     writer = csv.DictWriter(fh, fieldnames=headers)
     all_files = glob(path)
     for file in all_files:
