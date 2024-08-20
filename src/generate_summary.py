@@ -12,26 +12,26 @@ path = "/home/glick/JULIA-Take-2/src/slurm-*.out"
 output_file = "/home/labs/binford/single_sample_indexes/summary.csv"
 
 with open(output_file, "w") as fh:
-	writer = csv.DictWriter(fh, fieldnames=headers)
-	all_files = glob(path)
-	for file in all_files:
-		with open(file) as fh2:
-			data = fh2.readlines()
-			# This is gonna be gross
-			row = {
-				"index_sample": data[0].split(" ")[0].split("_")[1],
-				"reads_sample": data[0].split(" ")[1].split("_")[1],
-				"num_reads": data[1].split(" ")[0]
-				"num_aligned_none": data[3].split("(")[0].strip(),
-				"num_aligned_once": data[4].split("(")[0].strip(),
-				"num_aligned_multiple": data[5].split("(")[0].strip()
-			}
+    writer = csv.DictWriter(fh, fieldnames=headers)
+    all_files = glob(path)
+    for file in all_files:
+        with open(file) as fh2:
+            data = fh2.readlines()
+            # This is gonna be gross
+            row = {
+                "index_sample": data[0].split(" ")[0].split("_")[1],
+                "reads_sample": data[0].split(" ")[1].split("_")[1],
+                "num_reads": data[1].split(" ")[0],
+                "num_aligned_none": data[3].split("(")[0].strip(),
+                "num_aligned_once": data[4].split("(")[0].strip(),
+                "num_aligned_multiple": data[5].split("(")[0].strip()
+            }
 
-			row["single_alignment_rate"] =  row["num_aligned_once"] / int(row["num_reads"])
-			row["none_alignment_rate"] =  row["num_aligned_none"] / row["num_reads"]
-			row["multiple_alignment_rate"] =  row["num_aligned_multiple"] / row["num_reads"]
-			row["num_aligned_any"] = int(row["num_aligned_once"]) + int(row["num_aligned_multiple"])
-			row["alignment_rate"] = row["num_aligned_any"] / row["num_reads"]
+            row["single_alignment_rate"] =  row["num_aligned_once"] / int(row["num_reads"])
+            row["none_alignment_rate"] =  row["num_aligned_none"] / row["num_reads"]
+            row["multiple_alignment_rate"] =  row["num_aligned_multiple"] / row["num_reads"]
+            row["num_aligned_any"] = int(row["num_aligned_once"]) + int(row["num_aligned_multiple"])
+            row["alignment_rate"] = row["num_aligned_any"] / row["num_reads"]
 
 
-			writer.writerow(row)
+            writer.writerow(row)
