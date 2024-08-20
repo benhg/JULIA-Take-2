@@ -15,7 +15,7 @@ with open(output_file, "w") as fh:
     writer = csv.writer(fh)
     writer.writerow(headers)
 
-with open(output_file, "w") as fh:
+with open(output_file, "a") as fh:
     writer = csv.DictWriter(fh, fieldnames=headers)
     all_files = glob(path)
     for file in all_files:
