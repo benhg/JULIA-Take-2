@@ -6,7 +6,7 @@ Summary contains the information that Bowtie produced as well as where to get th
 from glob import glob
 import csv
 
-headers = ["reads_sample", "index_sample", "num_reads", "num_aligned_none", "num_aligned_once", "aligned_multiple", "none_alignment_rate", "single_alignment_rate", "multiple_alignment_rate", "num_aligned_any" ,"alignment_rate"]
+headers = ["reads_sample", "index_sample", "num_reads", "num_aligned_none", "num_aligned_once", "num_aligned_multiple", "none_alignment_rate", "single_alignment_rate", "multiple_alignment_rate", "num_aligned_any" ,"alignment_rate"]
 
 path = "/home/glick/JULIA-Take-2/src/slurm-*.out"
 output_file = "/home/labs/binford/single_sample_indexes/summary.csv"
