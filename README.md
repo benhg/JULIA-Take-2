@@ -33,7 +33,9 @@ After getting through step 3, step 4 turned out to be problematic. STAR consumes
 3. If we run out of memory trying to do step 2, repeat it but only using one sample at a time, to create 22 sets of outputs
 4. Examine the results and decide next steps.
 
-Currently, we are at step 2, and not having memory problems yet.
+Currently, we are at step 4, and not having memory problems yet.
+
+The next step we have is to create a summary. Ultimately, we want something that predicts which sequences (not samples, but sequences within the samples) are having index hopping. But first, we will create some summary statistics. See `generate_summary.py` for details.
 
 ## Notes
 
@@ -81,9 +83,9 @@ It's divided into two sections: batched files and combined files. The batched fi
 
 ### Bowtie Indices
 
-We created bowtie indices from each of the "lanes" (groups of 11 samples that were created with the same lane of the sequencer), as well as one index of all 22 samples. They are in the directories `all_untranslated_transcriptomes_index_lane_1`, `all_untranslated_transcriptomes_index_lane_2`, and `all_untranslated_transcriptomes_index`
+We created bowtie indices from each of the "lanes" (groups of 11 samples that were created with the same lane of the sequencer), as well as one index of all 22 samples. They are in the directories `all_untranslated_transcriptomes_index_lane_1`, `all_untranslated_transcriptomes_index_lane_2`, and `all_untranslated_transcriptomes_index`. In the `single_sample_indexes` directory, each sample has an index made just from its known transcripts.
 
 ### Bowtie output directories
 
-We are collecting the output files for Bowtie runs of lane1 against the lane1 index and lane2 against the lane2 index. the output files are in `/home/labs/binford/lane1_collateral` and `/home/labs/binford/lane2_collateral`, respectively.
+The bowtie output files underneath `single_sample_index/s<0XX>/` contain an index for each sample. Each set of reads is run against every sample from the same lane, and the .SAM output files are stored in the same directory as the index. For example, the .SAM file for reads from sample 2 run against the index for sample 1 is stored in the directory `/home/labs/binford/single_sample_indexes/s001_index/` with filename `index_001_read_s002.sam`.
 
