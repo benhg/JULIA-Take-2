@@ -23,20 +23,22 @@ with open(output_file, "a") as fh:
         with open(file) as fh2:
             data = fh2.readlines()
             # This is gonna be gross
-            row = {
-                "index_sample": data[0].split(" ")[0].split("_")[1].strip(),
-                "reads_sample": data[0].split(" ")[1].split("_")[1].strip(),
-                "num_reads": int(data[1].split(" ")[0]),
-                "num_aligned_none": int(data[3].split("(")[0].strip()),
-                "num_aligned_once": int(data[4].split("(")[0].strip()),
-                "num_aligned_multiple": int(data[5].split("(")[0].strip())
-            }
+            try:
 
-            row["single_alignment_rate"] =  row["num_aligned_once"] / int(row["num_reads"])
-            row["none_alignment_rate"] =  row["num_aligned_none"] / row["num_reads"]
-            row["multiple_alignment_rate"] =  row["num_aligned_multiple"] / row["num_reads"]
-            row["num_aligned_any"] = int(row["num_aligned_once"]) + int(row["num_aligned_multiple"])
-            row["alignment_rate"] = row["num_aligned_any"] / row["num_reads"]
+                row = {
+                    "index_sample": data[0].split(" ")[0].split("_")[1].strip(),
+                    "reads_sample": data[0].split(" ")[1].split("_")[1].strip(),
+                    "num_reads": int(data[1].split(" ")[0]),
+                    "num_aligned_none": int(data[3].split("(")[0].strip()),
+                    "num_aligned_once": int(data[4].split("(")[0].strip()),
+                    "num_aligned_multiple": int(data[5].split("(")[0].strip())
+                }
 
-
-            writer.writerow(row)
+                row["single_alignment_rate"] =  row["num_aligned_once"] / int(row["num_reads"])
+                row["none_alignment_rate"] =  row["num_aligned_none"] / row["num_reads"]
+                row["multiple_alignment_rate"] =  row["num_aligned_multiple"] / row["num_reads"]
+                row["num_aligned_any"] = int(row["num_aligned_once"]) + int(row["num_aligned_multiple"])
+                row["alignment_rate"] = row["num_aligned_any"] / row["num_reads"]
+                writer.writerow(row)
+            except:
+                print(f"failed for file {file}")     
