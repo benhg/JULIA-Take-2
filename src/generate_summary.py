@@ -19,6 +19,7 @@ with open(output_file, "a") as fh:
     writer = csv.DictWriter(fh, fieldnames=headers)
     all_files = glob(path)
     for file in all_files:
+        print(file)
         with open(file) as fh2:
             data = fh2.readlines()
             # This is gonna be gross
