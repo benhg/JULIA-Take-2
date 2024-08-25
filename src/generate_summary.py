@@ -22,6 +22,7 @@ with open(output_file, "a") as fh:
     all_files = glob(path)
     for file in all_files:
         with open(file) as fh2:
+            print(file)
             slurm_job_name = file.split("-")[1].split(".out")[0]
             print(slurm_job_name)
             slurm_time = subprocess.check_output(f'sacct --format="Elapsed" -j {slurm_job_name}', shell=True)
