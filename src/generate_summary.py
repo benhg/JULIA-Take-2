@@ -23,16 +23,24 @@ with open(output_file, "a") as fh:
     all_files = glob(path)
     for file in all_files:
         with open(file) as fh2:
-            slurm_job_name = file.split("slurm-")[1].split(".out")[0]
-            slurm_time_str = subprocess.check_output(f'sacct --format="Elapsed" -j {slurm_job_name}', shell=True).decode(sys.stdout.encoding)
-            slurm_time = slurm_time.split("\n")[-2].strip()
-            data = fh2.readlines()
-            print(f"Job {slurm_job_name} for index {data[0].split(" ")[0].split("_")[1].strip()} and reads {data[0].split(" ")[1].split("_")[1].strip()} took {slurm_time}")
-            # This is gonna be gross
             try:
+                # Name and metadata
+                slurm_job_name = file.split("slurm-")[1].split(".out")[0]
+                slurm_time_str = subprocess.check_output(f'sacct --format="Elapsed" -j {slurm_job_name}', shell=True).decode(sys.stdout.encoding)
+                slurm_time = slurm_time.split("\n")[-2].strip()
+                
+                # Text from stderr (which is summary info)
+                data = fh2.readlines()
+
+                #Sample IDs
+                index_sample = data[0].split(" ")[0].split("_")[1].strip()
+                reads_sample = data[0].split(" ")[1].split("_")[1].strip()
+
+                print(f"Job {slurm_job_name} for index {index_sample} and reads {reads_sample} took {slurm_time}")
+                # This is gonna be gross
                 row = {
-                    "index_sample": data[0].split(" ")[0].split("_")[1].strip(),
-                    "reads_sample": data[0].split(" ")[1].split("_")[1].strip(),
+                    "index_sample": index_sample,
+                    "reads_sample": reads_sample,
                     "num_reads": int(data[1].split(" ")[0]),
                     "num_aligned_none": int(data[3].split("(")[0].strip()),
                     "num_aligned_once": int(data[4].split("(")[0].strip()),
