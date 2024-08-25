@@ -21,7 +21,6 @@ with open(output_file, "a") as fh:
     writer = csv.DictWriter(fh, fieldnames=headers)
     all_files = glob(path)
     for file in all_files:
-        print(file)
         with open(file) as fh2:
             slurm_job_name = file.split("-")[1].split(".out")[0]
             slurm_time = subprocess.check_output(f'sacct --format="Elapsed" -j {slurm_job_name}', shell=True)
@@ -35,7 +34,7 @@ with open(output_file, "a") as fh:
                     "num_reads": int(data[1].split(" ")[0]),
                     "num_aligned_none": int(data[3].split("(")[0].strip()),
                     "num_aligned_once": int(data[4].split("(")[0].strip()),
-                    "num_aligned_multiple": int(data[5].split("(")[0].strip())
+                    "num_aligned_multiple": int(data[5].split("(")[0].strip()),
                     "exec_time": ""
                 }
 
