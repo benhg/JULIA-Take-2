@@ -6,6 +6,7 @@ Summary contains the information that Bowtie produced as well as where to get th
 from glob import glob
 import csv
 import subprocess
+import sys
 
 
 headers = ["reads_sample", "index_sample", "num_reads", "num_aligned_none", "num_aligned_once", "num_aligned_multiple", "none_alignment_rate", "single_alignment_rate", "multiple_alignment_rate", "num_aligned_any" ,"alignment_rate", "exec_time"]
@@ -22,11 +23,9 @@ with open(output_file, "a") as fh:
     all_files = glob(path)
     for file in all_files:
         with open(file) as fh2:
-            print(file)
             slurm_job_name = file.split("slurm-")[1].split(".out")[0]
-            print(slurm_job_name)
             slurm_time = subprocess.check_output(f'sacct --format="Elapsed" -j {slurm_job_name}', shell=True).decode(sys.stdout.encoding)
-            print(slurm_time)
+            print(slurm_time.split("\n")[-1].strip())
             data = fh2.readlines()
             # This is gonna be gross
             try:
