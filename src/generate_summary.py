@@ -54,6 +54,6 @@ with open(output_file, "a") as fh:
                 row["num_aligned_any"] = int(row["num_aligned_once"]) + int(row["num_aligned_multiple"])
                 row["alignment_rate"] = row["num_aligned_any"] / row["num_reads"]
                 writer.writerow(row)
-            except e:
+            except Exception as e:
                 raise e
                 print(f"failed for file {file}")     
