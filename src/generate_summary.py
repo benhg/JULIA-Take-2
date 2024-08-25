@@ -25,7 +25,7 @@ with open(output_file, "a") as fh:
         with open(file) as fh2:
             slurm_job_name = file.split("slurm-")[1].split(".out")[0]
             slurm_time = subprocess.check_output(f'sacct --format="Elapsed" -j {slurm_job_name}', shell=True).decode(sys.stdout.encoding)
-            print(slurm_time.split("\n")[-1].strip())
+            print(slurm_time.split("\n"))
             data = fh2.readlines()
             # This is gonna be gross
             try:
