@@ -24,9 +24,10 @@ with open(output_file, "a") as fh:
     for file in all_files:
         with open(file) as fh2:
             slurm_job_name = file.split("slurm-")[1].split(".out")[0]
-            slurm_time = subprocess.check_output(f'sacct --format="Elapsed" -j {slurm_job_name}', shell=True).decode(sys.stdout.encoding)
-            print(slurm_time.split("\n"))
+            slurm_time_str = subprocess.check_output(f'sacct --format="Elapsed" -j {slurm_job_name}', shell=True).decode(sys.stdout.encoding)
+            slurm_time = slurm_time.split("\n")[-2].strip()
             data = fh2.readlines()
+            print(f"Job {slurm_job_name} for index {data[0].split(" ")[0].split("_")[1].strip()} and reads {data[0].split(" ")[1].split("_")[1].strip()} took {slurm_time}")
             # This is gonna be gross
             try:
                 row = {
@@ -36,7 +37,7 @@ with open(output_file, "a") as fh:
                     "num_aligned_none": int(data[3].split("(")[0].strip()),
                     "num_aligned_once": int(data[4].split("(")[0].strip()),
                     "num_aligned_multiple": int(data[5].split("(")[0].strip()),
-                    "exec_time": ""
+                    "exec_time": slurm_time
                 }
 
                 row["single_alignment_rate"] =  row["num_aligned_once"] / int(row["num_reads"])
