@@ -77,7 +77,7 @@ with open(output_file, "a") as fh:
                 # This is gonna be gross
                 row = {
                     "index_sample": index_sample,
-                    "inxex_taxon": sample_to_taxon[index_sample],
+                    "index_taxon": sample_to_taxon[index_sample],
                     "reads_sample": reads_sample,
                     "reads_taxon": sample_to_taxon[reads_sample],
                     "num_reads": int(data[1].split(" ")[0]),
