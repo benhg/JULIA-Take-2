@@ -24,11 +24,14 @@ def run_alignment(reads_sample_id, index_id):
     else:
         lane = 2
 
+    print(lane)
+
     #print(f"{combined_files_dir}/lane{lane}-s{index_id}*R1*")
     dir_1_filename = glob(f"{combined_files_dir}/lane{lane}-s{reads_sample_id}*R1*")[0]
     #print(dir_1_filename)
     dir_2_filename = dir_1_filename.replace("R1", "R2")
     job_filename = f"bowtie_cmds/unpaired_align_{index_id}_s{reads_sample_id}.sh"
+    print(dir_1_filename)
 
     sbatch_text = sbatch_template.format(index_id, reads_sample_id, index_id, index_id, dir_1_filename, index_id, index_id, reads_sample_id)
     print(dir_1_filename, dir_2_filename, index_id, reads_sample_id)
