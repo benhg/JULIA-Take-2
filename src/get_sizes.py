@@ -29,11 +29,15 @@ sample_to_taxon = {
     "s022": "Periegops_MP_WB"
 }
 
+
 def run_cmd(cmd):
     return subprocess.check_output(cmd, shell=True).decode(sys.stdout.encoding)
 
 
 for index_sample in sample_to_taxon.keys():
     # Number of transcripts
-    num_transcripts = int(run_cmd(f'bowtie2-inspect --large-index /home/labs/binford/single_sample_indexes/{index_sample}_index/{index_sample}_index | grep ">" | wc -l'))
+    num_transcripts = int(
+        run_cmd(
+            f'bowtie2-inspect --large-index /home/labs/binford/single_sample_indexes/{index_sample}_index/{index_sample}_index | grep ">" | wc -l'
+        ))
     print(index_sample, num_transcripts)

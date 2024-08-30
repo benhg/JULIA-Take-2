@@ -16,6 +16,7 @@ def process_file(file):
         count = SeqIO.write(sequences, new_handle, "fasta")
         print(f"extracted {count} sequences from {old_handle.split('/'[-1])}")
 
+
 pool = multiprocessing.Pool()
 
 work = pool.map(process_file, [file for file in glob(f"{source_dir}/*.fastq")])

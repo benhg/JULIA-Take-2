@@ -8,7 +8,6 @@ import csv
 import subprocess
 import sys
 
-
 sample_to_taxon = {
     "s001": "Drymusa_serrana",
     "s002": "Loxo_arizonica",
@@ -34,7 +33,7 @@ sample_to_taxon = {
     "s022": "Periegops_MP_WB"
 }
 
-# Collected from  
+# Collected from
 # f'bowtie2-inspect --large-index /home/labs/binford/single_sample_indexes/{index_sample}_index/{index_sample}_index
 # see get_sizes.py
 sample_to_transcript_count = {
@@ -66,7 +65,15 @@ sample_to_transcript_count = {
 def run_cmd(cmd):
     return subprocess.check_output(cmd, shell=True).decode(sys.stdout.encoding)
 
-headers = ["reads_sample", "reads_taxon", "index_sample", "index_taxon", "num_reads", "num_transcripts",  "pairtype", "num_aligned_none", "num_aligned_once", "num_aligned_multiple", "none_alignment_rate", "single_alignment_rate", "multiple_alignment_rate", "num_aligned_any" ,"alignment_rate", "reads_per_transcript_none", "reads_per_transcript_one", "reads_per_transcript_multiple", "reads_per_transcript_any", "exec_time"]
+
+headers = [
+    "reads_sample", "reads_taxon", "index_sample", "index_taxon", "num_reads",
+    "num_transcripts", "pairtype", "num_aligned_none", "num_aligned_once",
+    "num_aligned_multiple", "none_alignment_rate", "single_alignment_rate",
+    "multiple_alignment_rate", "num_aligned_any", "alignment_rate",
+    "reads_per_transcript_none", "reads_per_transcript_one",
+    "reads_per_transcript_multiple", "reads_per_transcript_any", "exec_time"
+]
 
 path = "/home/glick/JULIA-Take-2/src/slurm-*.out"
 output_file = "/home/labs/binford/single_sample_indexes/summary.csv"
@@ -83,11 +90,10 @@ with open(output_file, "a") as fh:
             try:
                 # Name and metadata
                 slurm_job_name = file.split("slurm-")[1].split(".out")[0]
-                slurm_time_str = run_cmd(f'sacct --format="Elapsed" -j {slurm_job_name}')
+                slurm_time_str = run_cmd(
+                    f'sacct --format="Elapsed" -j {slurm_job_name}')
                 slurm_time = slurm_time_str.split("\n")[-2].strip()
 
-
-                
                 # Text from stderr (which is summary info)
                 data = fh2.readlines()
 
@@ -95,8 +101,9 @@ with open(output_file, "a") as fh:
                 index_sample = data[0].split(" ")[0].split("_")[1].strip()
                 reads_sample = data[0].split(" ")[1].split("_")[1].strip()
 
-
-                print(f"Job {slurm_job_name} for index {index_sample} and reads {reads_sample} took {slurm_time}")
+                print(
+                    f"Job {slurm_job_name} for index {index_sample} and reads {reads_sample} took {slurm_time}"
+                )
                 # This is gonna be gross
                 row = {
                     "index_sample": index_sample,
@@ -104,7 +111,8 @@ with open(output_file, "a") as fh:
                     "reads_sample": reads_sample,
                     "reads_taxon": sample_to_taxon[reads_sample],
                     "num_reads": int(data[1].split(" ")[0]),
-                    "num_transcripts": sample_to_transcript_count[index_sample],
+                    "num_transcripts":
+                    sample_to_transcript_count[index_sample],
                     "num_aligned_none": int(data[3].split("(")[0].strip()),
                     "num_aligned_once": int(data[4].split("(")[0].strip()),
                     "num_aligned_multiple": int(data[5].split("(")[0].strip()),
@@ -125,7 +133,8 @@ with open(output_file, "a") as fh:
 
                 if reads_sample == index_sample:
                     row["pairtype"] = "True_Auto"
-                elif sample_to_taxon[reads_sample] == sample_to_taxon[index_sample]:
+                elif sample_to_taxon[reads_sample] == sample_to_taxon[
+                        index_sample]:
                     row["pairtype"] = "Taxon_Auto"
                 elif reads_lane != index_lane:
                     row["pairtype"] = "Other_Lane"
@@ -133,18 +142,30 @@ with open(output_file, "a") as fh:
                     row["pairtype"] = "Allo"
 
                 # Alignment rates
-                row["single_alignment_rate"] =  row["num_aligned_once"] / int(row["num_reads"])
-                row["none_alignment_rate"] =  row["num_aligned_none"] / row["num_reads"]
-                row["multiple_alignment_rate"] =  row["num_aligned_multiple"] / row["num_reads"]
-                row["num_aligned_any"] = int(row["num_aligned_once"]) + int(row["num_aligned_multiple"])
-                row["alignment_rate"] = row["num_aligned_any"] / row["num_reads"]
+                row["single_alignment_rate"] = row["num_aligned_once"] / int(
+                    row["num_reads"])
+                row["none_alignment_rate"] = row["num_aligned_none"] / row[
+                    "num_reads"]
+                row["multiple_alignment_rate"] = row[
+                    "num_aligned_multiple"] / row["num_reads"]
+                row["num_aligned_any"] = int(row["num_aligned_once"]) + int(
+                    row["num_aligned_multiple"])
+                row["alignment_rate"] = row["num_aligned_any"] / row[
+                    "num_reads"]
 
                 # Reads/transcript scores
-                row["reads_per_transcript_none"] = row["num_aligned_none"] / sample_to_transcript_count[index_sample]
-                row["reads_per_transcript_one"] = row["num_aligned_once"] / sample_to_transcript_count[index_sample]
-                row["reads_per_transcript_multiple"] = row["num_aligned_multiple"] / sample_to_transcript_count[index_sample]
-                row["reads_per_transcript_any"] = row["num_aligned_any"] / sample_to_transcript_count[index_sample]
-
+                row["reads_per_transcript_none"] = row[
+                    "num_aligned_none"] / sample_to_transcript_count[
+                        index_sample]
+                row["reads_per_transcript_one"] = row[
+                    "num_aligned_once"] / sample_to_transcript_count[
+                        index_sample]
+                row["reads_per_transcript_multiple"] = row[
+                    "num_aligned_multiple"] / sample_to_transcript_count[
+                        index_sample]
+                row["reads_per_transcript_any"] = row[
+                    "num_aligned_any"] / sample_to_transcript_count[
+                        index_sample]
 
                 writer.writerow(row)
             except Exception as e:
