@@ -36,29 +36,30 @@ sample_to_taxon = {
 
 # Collected from  
 # f'bowtie2-inspect --large-index /home/labs/binford/single_sample_indexes/{index_sample}_index/{index_sample}_index
+# see get_sizes.py
 sample_to_transcript_count = {
-    "s001": "Drymusa_serrana",
-    "s002": "Loxo_arizonica",
-    "s003": "Loxo_arizonica",
-    "s004": "Loxo_arizonica",
-    "s005": "Hexophthalma",
-    "s006": "Hexophthalma",
-    "s007": "Hexophthalma",
-    "s008": "Periegops_MP_VG",
-    "s009": "Periegops_MP_VG",
-    "s010": "Periegops_MP_VG",
-    "s011": "Periegops_MP_WB",
-    "s012": "Periegops_VG_H",
-    "s013": "Physocyclus",
-    "s014": "Plectreurys",
-    "s015": "Loxo_reclusa",
-    "s016": "Zephryarchea",
-    "s017": "Zephryarchea",
-    "s018": "Scytodes",
-    "s019": "Loxo_rufescens",
-    "s020": "Loxo_spinulosa",
-    "s021": "Periegops_MP_WB",
-    "s022": "Periegops_MP_WB"
+    "s001": 146829,
+    "s002": 165083,
+    "s003": 176396,
+    "s004": 177026,
+    "s005": 178906,
+    "s006": 136577,
+    "s007": 157499,
+    "s008": 143469,
+    "s009": 167627,
+    "s010": 183810,
+    "s011": 191292,
+    "s012": 167942,
+    "s013": 223989,
+    "s014": 229674,
+    "s015": 196020,
+    "s016": 161846,
+    "s017": 292600,
+    "s018": 148310,
+    "s019": 191686,
+    "s020": 167585,
+    "s021": 245515,
+    "s022": 170940
 }
 
 
