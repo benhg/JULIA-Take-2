@@ -39,7 +39,7 @@ sample_to_taxon = {
 def run_cmd(cmd):
     return subprocess.check_output(cmd, shell=True).decode(sys.stdout.encoding)
 
-headers = ["reads_sample", "reads_taxon", "index_sample", "index_taxon", "num_reads", "num_transcripts",  "num_aligned_none", "num_aligned_once", "num_aligned_multiple", "none_alignment_rate", "single_alignment_rate", "multiple_alignment_rate", "num_aligned_any" ,"alignment_rate", "exec_time"]
+headers = ["reads_sample", "reads_taxon", "index_sample", "index_taxon", "num_reads", "num_transcripts",  "num_aligned_none", "num_aligned_once", "num_aligned_multiple", "none_alignment_rate", "single_alignment_rate", "multiple_alignment_rate", "num_aligned_any" ,"alignment_rate", "reads_per_transcript_none", "reads_per_transcript_one", "reads_per_transcript_multiple", "reads_per_transcript_any", "exec_time"]
 
 path = "/home/glick/JULIA-Take-2/src/slurm-*.out"
 output_file = "/home/labs/binford/single_sample_indexes/summary.csv"
@@ -88,11 +88,20 @@ with open(output_file, "a") as fh:
                     "exec_time": slurm_time
                 }
 
+                # Alignment rates
                 row["single_alignment_rate"] =  row["num_aligned_once"] / int(row["num_reads"])
                 row["none_alignment_rate"] =  row["num_aligned_none"] / row["num_reads"]
                 row["multiple_alignment_rate"] =  row["num_aligned_multiple"] / row["num_reads"]
                 row["num_aligned_any"] = int(row["num_aligned_once"]) + int(row["num_aligned_multiple"])
                 row["alignment_rate"] = row["num_aligned_any"] / row["num_reads"]
+
+                # Reads/transcript scores
+                row["reads_per_transcript_none"] = row["num_aligned_none"] / num_transcripts
+                row["reads_per_transcript_one"] = row["num_aligned_once"] / num_transcripts
+                row["reads_per_transcript_multiple"] = row["num_aligned_multiple"] / num_transcripts
+                row["reads_per_transcript_any"] = row["num_aligned_any"] / num_transcripts
+
+
                 writer.writerow(row)
             except Exception as e:
                 print(f"failed for file {file}")     
