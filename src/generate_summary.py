@@ -66,7 +66,7 @@ sample_to_transcript_count = {
 def run_cmd(cmd):
     return subprocess.check_output(cmd, shell=True).decode(sys.stdout.encoding)
 
-headers = ["reads_sample", "reads_taxon", "index_sample", "index_taxon", "num_reads", "num_transcripts",  "num_aligned_none", "num_aligned_once", "num_aligned_multiple", "none_alignment_rate", "single_alignment_rate", "multiple_alignment_rate", "num_aligned_any" ,"alignment_rate", "reads_per_transcript_none", "reads_per_transcript_one", "reads_per_transcript_multiple", "reads_per_transcript_any", "exec_time"]
+headers = ["reads_sample", "reads_taxon", "index_sample", "index_taxon", "num_reads", "num_transcripts",  "pairtype", "num_aligned_none", "num_aligned_once", "num_aligned_multiple", "none_alignment_rate", "single_alignment_rate", "multiple_alignment_rate", "num_aligned_any" ,"alignment_rate", "reads_per_transcript_none", "reads_per_transcript_one", "reads_per_transcript_multiple", "reads_per_transcript_any", "exec_time"]
 
 path = "/home/glick/JULIA-Take-2/src/slurm-*.out"
 output_file = "/home/labs/binford/single_sample_indexes/summary.csv"
@@ -110,6 +110,15 @@ with open(output_file, "a") as fh:
                     "num_aligned_multiple": int(data[5].split("(")[0].strip()),
                     "exec_time": slurm_time
                 }
+
+                # Pair type
+
+                if reads_sample == index_sample:
+                    row["pairtype"] = "True_Auto"
+                elif sample_to_taxon[reads_sample] == sample_to_taxon[index_sample]:
+                    row["pairtype"] = "Taxon_Auto"
+                else:
+                    row["pairtype"] = "Allo"
 
                 # Alignment rates
                 row["single_alignment_rate"] =  row["num_aligned_once"] / int(row["num_reads"])
