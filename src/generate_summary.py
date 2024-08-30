@@ -56,7 +56,7 @@ with open(output_file, "a") as fh:
             try:
                 # Name and metadata
                 slurm_job_name = file.split("slurm-")[1].split(".out")[0]
-                slurm_time_str = run_cmd(f'sacct --format="Elapsed" -j {slurm_job_name}')\
+                slurm_time_str = run_cmd(f'sacct --format="Elapsed" -j {slurm_job_name}')
                 slurm_time = slurm_time_str.split("\n")[-2].strip()
 
 
