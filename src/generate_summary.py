@@ -113,10 +113,22 @@ with open(output_file, "a") as fh:
 
                 # Pair type
 
+                if int(reads_sample.split("s")[1]) <= 11:
+                    reads_lane = 1
+                else:
+                    reads_lane = 2
+
+                if int(index_sample.split("s")[1]) <= 11:
+                    index_lane = 1
+                else:
+                    index_lane = 2
+
                 if reads_sample == index_sample:
                     row["pairtype"] = "True_Auto"
                 elif sample_to_taxon[reads_sample] == sample_to_taxon[index_sample]:
                     row["pairtype"] = "Taxon_Auto"
+                elif reads_lane != index_lane:
+                    row["pairtype"] = "Other_Lane"
                 else:
                     row["pairtype"] = "Allo"
 
