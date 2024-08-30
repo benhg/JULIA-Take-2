@@ -1,3 +1,7 @@
+"""
+Print the number of transcripts in each index
+"""
+
 
 sample_to_taxon = {
     "s001": "Drymusa_serrana",
@@ -31,3 +35,4 @@ def run_cmd(cmd):
 for index_sample in sample_to_taxon.keys():
     # Number of transcripts
     num_transcripts = int(run_cmd(f'bowtie2-inspect --large-index /home/labs/binford/single_sample_indexes/{index_sample}_index/{index_sample}_index | grep ">" | wc -l'))
+    print(index_sample, num_transcripts)
