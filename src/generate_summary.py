@@ -32,7 +32,33 @@ sample_to_taxon = {
     "s020": "Loxo_spinulosa",
     "s021": "Periegops_MP_WB",
     "s022": "Periegops_MP_WB"
+}
 
+# Collected from  
+# f'bowtie2-inspect --large-index /home/labs/binford/single_sample_indexes/{index_sample}_index/{index_sample}_index
+sample_to_transcript_count = {
+    "s001": "Drymusa_serrana",
+    "s002": "Loxo_arizonica",
+    "s003": "Loxo_arizonica",
+    "s004": "Loxo_arizonica",
+    "s005": "Hexophthalma",
+    "s006": "Hexophthalma",
+    "s007": "Hexophthalma",
+    "s008": "Periegops_MP_VG",
+    "s009": "Periegops_MP_VG",
+    "s010": "Periegops_MP_VG",
+    "s011": "Periegops_MP_WB",
+    "s012": "Periegops_VG_H",
+    "s013": "Physocyclus",
+    "s014": "Plectreurys",
+    "s015": "Loxo_reclusa",
+    "s016": "Zephryarchea",
+    "s017": "Zephryarchea",
+    "s018": "Scytodes",
+    "s019": "Loxo_rufescens",
+    "s020": "Loxo_spinulosa",
+    "s021": "Periegops_MP_WB",
+    "s022": "Periegops_MP_WB"
 }
 
 
@@ -69,10 +95,6 @@ with open(output_file, "a") as fh:
                 reads_sample = data[0].split(" ")[1].split("_")[1].strip()
 
 
-                # Number of transcripts
-                num_transcripts = int(run_cmd(f'bowtie2-inspect --large-index /home/labs/binford/single_sample_indexes/{index_sample}_index/{index_sample}_index | grep ">" | wc -l'))
-
-
                 print(f"Job {slurm_job_name} for index {index_sample} and reads {reads_sample} took {slurm_time}")
                 # This is gonna be gross
                 row = {
@@ -81,7 +103,7 @@ with open(output_file, "a") as fh:
                     "reads_sample": reads_sample,
                     "reads_taxon": sample_to_taxon[reads_sample],
                     "num_reads": int(data[1].split(" ")[0]),
-                    "num_transcripts": num_transcripts,
+                    "num_transcripts": sample_to_transcript_count[index_sample],
                     "num_aligned_none": int(data[3].split("(")[0].strip()),
                     "num_aligned_once": int(data[4].split("(")[0].strip()),
                     "num_aligned_multiple": int(data[5].split("(")[0].strip()),
@@ -105,4 +127,3 @@ with open(output_file, "a") as fh:
                 writer.writerow(row)
             except Exception as e:
                 print(f"failed for file {file}")
-                raise e   
