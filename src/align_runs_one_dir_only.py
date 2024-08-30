@@ -19,7 +19,7 @@ bowtie2 -f --threads 48 -x /home/labs/binford/single_sample_indexes/s{}_index/s{
 """
 
 def run_alignment(reads_sample_id, index_id):
-    if int(reads_sample_id.split("s")[1]) <= 11:
+    if int(reads_sample_id) <= 11:
         lane = 1
     else:
         lane = 2
