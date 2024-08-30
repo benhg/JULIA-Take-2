@@ -2,6 +2,7 @@
 Print the number of transcripts in each index
 """
 import subprocess
+import sys
 
 sample_to_taxon = {
     "s001": "Drymusa_serrana",
