@@ -119,10 +119,10 @@ with open(output_file, "a") as fh:
                 row["alignment_rate"] = row["num_aligned_any"] / row["num_reads"]
 
                 # Reads/transcript scores
-                row["reads_per_transcript_none"] = row["num_aligned_none"] / num_transcripts
-                row["reads_per_transcript_one"] = row["num_aligned_once"] / num_transcripts
-                row["reads_per_transcript_multiple"] = row["num_aligned_multiple"] / num_transcripts
-                row["reads_per_transcript_any"] = row["num_aligned_any"] / num_transcripts
+                row["reads_per_transcript_none"] = row["num_aligned_none"] / sample_to_transcript_count[index_sample]
+                row["reads_per_transcript_one"] = row["num_aligned_once"] / sample_to_transcript_count[index_sample]
+                row["reads_per_transcript_multiple"] = row["num_aligned_multiple"] / sample_to_transcript_count[index_sample]
+                row["reads_per_transcript_any"] = row["num_aligned_any"] / sample_to_transcript_count[index_sample]
 
 
                 writer.writerow(row)
