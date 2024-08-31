@@ -33,6 +33,32 @@ sample_to_taxon = {
     "s022": "Periegops_MP_WB"
 }
 
+# Handles variations like WB vs VG
+sample_to_taxon_short = {
+    "s001": "Drymusa_serrana",
+    "s002": "Loxo_arizonica",
+    "s003": "Loxo_arizonica",
+    "s004": "Loxo_arizonica",
+    "s005": "Hexophthalma",
+    "s006": "Hexophthalma",
+    "s007": "Hexophthalma",
+    "s008": "Periegops",
+    "s009": "Periegops",
+    "s010": "Periegops",
+    "s011": "Periegops",
+    "s012": "Periegops",
+    "s013": "Physocyclus",
+    "s014": "Plectreurys",
+    "s015": "Loxo_reclusa",
+    "s016": "Zephryarchea",
+    "s017": "Zephryarchea",
+    "s018": "Scytodes",
+    "s019": "Loxo_rufescens",
+    "s020": "Loxo_spinulosa",
+    "s021": "Periegops",
+    "s022": "Periegops"
+}
+
 # Collected from
 # f'bowtie2-inspect --large-index /home/labs/binford/single_sample_indexes/{index_sample}_index/{index_sample}_index
 # see get_sizes.py
@@ -133,7 +159,7 @@ with open(output_file, "a") as fh:
 
                 if reads_sample == index_sample:
                     row["pairtype"] = "True_Auto"
-                elif sample_to_taxon[reads_sample] == sample_to_taxon[
+                elif sample_to_taxon[reads_sample] == sample_to_taxon_short[
                         index_sample]:
                     row["pairtype"] = "Taxon_Auto"
                 elif reads_lane != index_lane:
