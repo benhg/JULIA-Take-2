@@ -159,7 +159,7 @@ with open(output_file, "a") as fh:
 
                 if reads_sample == index_sample:
                     row["pairtype"] = "True_Auto"
-                elif sample_to_taxon[reads_sample] == sample_to_taxon_short[
+                elif sample_to_taxon_short[reads_sample] == sample_to_taxon_short[
                         index_sample]:
                     row["pairtype"] = "Taxon_Auto"
                 elif reads_lane != index_lane:
