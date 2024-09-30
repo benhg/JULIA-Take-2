@@ -20,11 +20,11 @@ bowtie2-build --threads 48 --small-index /home/labs/binford/taxon_confirmation_i
 
 ## First, turn each sequence in the fasta file into its own fasta file
 with open(file, "data/all_sequences.fasta") as old_handle:
-    sequences = SeqIO.parse(old_handle, "fastq")
+    sequences = SeqIO.parse(old_handle, "fasta")
     for record in sequences:
         with open(f"{base_dir}/{record.id}.fasta", "w") as new_file:
-            file.write(f">{record.id}")
-            file.write(f"{record.sequence}")
+            new_file.write(f">{record.id}")
+            new_file.write(f"{record.sequence}")
 
     
 
