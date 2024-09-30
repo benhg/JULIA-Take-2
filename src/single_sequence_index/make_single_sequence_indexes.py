@@ -33,7 +33,7 @@ with open("data/all_sequences.fasta", "r") as old_handle:
 ## Then, submit a bunch of indexing jobs to make indexes
 files = glob.glob(f"{base_dir}/*.fasta")
 for file in files:
-    name = file.split(".fasta")[0]
+    name = file.split(".fasta")[0].split("/home/labs/binford/taxon_confirmation_indexes/")[1]
     sbatch_text = sbatch_template.format(name, name, name,
                                          name, name)
     with open(f"bowtie_cmds/gen_index_s{name}.sh", "w") as fh:
