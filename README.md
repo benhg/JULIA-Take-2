@@ -6,6 +6,12 @@ We have a dataset of a bunch of genome sequences from various spiders. We are co
 
 We're going to align sequences using [STAR](https://github.com/alexdobin/STAR).
 
+## Contents
+
+1. A set of tools used to work with indexes and reads for full samples. This is in `full_sample_index/`
+2. A set of tools used to work with single transcript indexes and full sample reads. This is in `single_sequence_index/`
+
+
 ## Plan of Action
 
 Currently, we have a set of known transcripts in FASTA format, and a set of raw reads in FASTQ format. We will align the raw reads against the known transcripts using STAR. The specific plan of action is:
