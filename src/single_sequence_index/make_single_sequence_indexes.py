@@ -24,7 +24,7 @@ with open("data/all_sequences.fasta", "r") as old_handle:
     for record in sequences:
         with open(f"{base_dir}/{record.id}.fasta", "w") as new_file:
             new_file.write(f">{record.id}")
-            new_file.write(f"{record.sequence}")
+            new_file.write(f"{record}")
 
     
 
