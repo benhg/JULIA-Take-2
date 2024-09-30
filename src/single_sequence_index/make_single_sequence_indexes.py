@@ -23,8 +23,8 @@ with open("data/all_sequences.fasta", "r") as old_handle:
     sequences = SeqIO.parse(old_handle, "fasta")
     for record in sequences:
         with open(f"{base_dir}/{record.id}.fasta", "w") as new_file:
-            new_file.write(f">{record.id}")
-            new_file.write(f"{record.seq}")
+            new_file.write(f">{record.id}\n")
+            new_file.write(f"{record.seq}\n")
 
     
 
