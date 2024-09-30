@@ -1,7 +1,7 @@
 """
-Make separate bowtie indexes for each sample
+Run alignments on the small indexes
 
-They'll go into /home/labs/binford/single_sample_indexes/s_{XYZ}/
+They'll go into /home/labs/binford/taxon_confirmation_indexes/s_{XYZ}/
 """
 
 import subprocess
@@ -46,7 +46,7 @@ def run_alignment(reads_sample_id, index_id):
 
 def run_all_intra_lane_samples():
     # For each sequence
-    for index in glob(f"{base_dir}/*.fasta")
+    for index in glob(f"{base_dir}/*.fasta"):
         index_id = index.split(".fasta")[0].split("/home/labs/binford/taxon_confirmation_indexes/")[1]
         # For each sample
         for i in range(1,23):
