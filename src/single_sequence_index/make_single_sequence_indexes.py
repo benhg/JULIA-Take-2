@@ -6,6 +6,7 @@ They'll go into /home/labs/binford//home/labs/binford/taxon_confirmation_indexes
 
 import subprocess
 from Bio import SeqIO
+import glob
 
 base_dir = "/home/labs/binford/taxon_confirmation_indexes/"
 
@@ -30,16 +31,15 @@ with open("data/all_sequences.fasta", "r") as old_handle:
 
 
 ## Then, submit a bunch of indexing jobs to make indexes
-"""
-for i in range(1, 23):
-    sample_id = str(i).zfill(3)
-    sbatch_text = sbatch_template.format(sample_id, sample_id, sample_id,
-                                         sample_id, sample_id)
-    with open(f"bowtie_cmds/gen_index_s{sample_id}.sh", "w") as fh:
+files = glob.glob(f"{base_dir}/*.fasta")
+for file in files:
+    name = file.split(".fasta")[0]
+    sbatch_text = sbatch_template.format(name, name, name,
+                                         name, name)
+    with open(f"bowtie_cmds/gen_index_s{name}.sh", "w") as fh:
         fh.write(sbatch_text)
     print(
-        subprocess.check_output(
-            f"sbatch /home/glick/JULIA-Take-2/src/bowtie_cmds/gen_index_s{sample_id}.sh",
-            shell=True))
-"""
+        #subprocess.check_output(
+            f"sbatch /home/glick/JULIA-Take-2/src/single_sequence_index/bowtie_cmds/gen_index_s{name}.sh")#,
+         #   shell=True))
 
