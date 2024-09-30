@@ -43,6 +43,11 @@ Currently, we are at step 4, and not having memory problems yet.
 
 The next step we have is to create a summary. Ultimately, we want something that predicts which sequences (not samples, but sequences within the samples) are having index hopping. But first, we will create some summary statistics. See `generate_summary.py` for details.
 
+### Next Step (2024/09/27)
+1. For the list of interesting transcripts, make an index for each transcript
+2. Run all reads (or at least all from its lane) aginst that
+3. Look at the distribution/size of the mapping results.
+
 ## Notes
 
 To execute one of the python scripts on slurm, use "slurm_run.sh" script:
