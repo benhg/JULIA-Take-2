@@ -16,7 +16,7 @@ sbatch_template = """#!/bin/bash
 mkdir -p /home/labs/binford/taxon_confirmation_indexes/{}_index
 chmod 777 /home/labs/binford/taxon_confirmation_indexes/{}_index
 
-bowtie2-build --threads 48 --small-index /home/labs/binford/taxon_confirmation_indexes/{}.fasta /home/labs/binford/taxon_confirmation_indexes/{}_index/{}_index
+bowtie2-build --threads 48 /home/labs/binford/taxon_confirmation_indexes/{}.fasta /home/labs/binford/taxon_confirmation_indexes/{}_index/{}_index
 """
 
 ## First, turn each sequence in the fasta file into its own fasta file
