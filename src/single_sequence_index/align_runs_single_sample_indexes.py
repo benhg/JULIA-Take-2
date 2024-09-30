@@ -51,7 +51,6 @@ def run_all_intra_lane_samples():
         # For each sample
         for i in range(1,23):
             reads_sample_id = str(i).zfill(3)
-
             print(reads_sample_id, index_id)
             run_alignment(reads_sample_id, index_id)
 
@@ -61,7 +60,9 @@ def run_all_intra_lane_samples():
 #                 ["016", "004"], ["004", "016"], ["018", "004"], ["004", "018"],
 #                 ["012", "008"], ["008", "012"], ["019", "008"], ["008", "019"]]
 
-pairs_to_run = []
+#pairs_to_run = []
 
-for pair in pairs_to_run:
-    run_alignment(pair[0], pair[1])
+#for pair in pairs_to_run:
+#    run_alignment(pair[0], pair[1])
+
+run_all_intra_lane_samples()
