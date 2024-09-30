@@ -39,7 +39,7 @@ for file in files:
     with open(f"bowtie_cmds/gen_index_s{name}.sh", "w") as fh:
         fh.write(sbatch_text)
     print(
-        #subprocess.check_output(
-            f"sbatch /home/glick/JULIA-Take-2/src/single_sequence_index/bowtie_cmds/gen_index_s{name}.sh")#,
-         #   shell=True))
+        subprocess.check_output(
+            f"sbatch /home/glick/JULIA-Take-2/src/single_sequence_index/bowtie_cmds/gen_index_s{name}.sh"),
+           shell=True))
 
