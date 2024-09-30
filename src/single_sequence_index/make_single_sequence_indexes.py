@@ -40,6 +40,6 @@ for file in files:
         fh.write(sbatch_text)
     print(
         subprocess.check_output(
-            f"sbatch /home/glick/JULIA-Take-2/src/single_sequence_index/bowtie_cmds/gen_index_s{name}.sh"),
+            f"sbatch /home/glick/JULIA-Take-2/src/single_sequence_index/bowtie_cmds/gen_index_s{name}.sh",
            shell=True))
 
