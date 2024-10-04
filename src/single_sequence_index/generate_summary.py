@@ -101,8 +101,8 @@ headers = [
     "reads_per_transcript_multiple", "reads_per_transcript_any", "exec_time"
 ]
 
-path = "/home/glick/JULIA-Take-2/src/slurm-*.out"
-output_file = "/home/labs/binford/single_sample_indexes/summary.csv"
+path = "/home/glick/JULIA-Take-2/src/single_sequence_index/slurm-*.out"
+output_file = "/home/labs/binford/taxon_confirmation_indexes/summary.csv"
 
 with open(output_file, "w") as fh:
     writer = csv.writer(fh)
