@@ -30,7 +30,8 @@ sample_to_taxon = {
     "s019": "Loxo_rufescens",
     "s020": "Loxo_spinulosa",
     "s021": "Periegops_MP_WB",
-    "s022": "Periegops_MP_WB"
+    "s022": "Periegops_MP_WB",
+    "c74742": "Loxo_spinulosa"
 }
 
 # Handles variations like WB vs VG
@@ -56,7 +57,8 @@ sample_to_taxon_short = {
     "s019": "Loxo_rufescens",
     "s020": "Loxo_spinulosa",
     "s021": "Periegops",
-    "s022": "Periegops"
+    "s022": "Periegops",
+    "c74742": "Loxo_spinulosa"
 }
 
 # Collected from
