@@ -151,14 +151,20 @@ with open(output_file, "a") as fh:
 
                 # Pair type
 
-                if int(reads_sample.split("s")[1]) <= 11:
-                    reads_lane = 1
-                else:
+                try:
+                    if int(reads_sample.split("s")[1]) <= 11:
+                        reads_lane = 1
+                    else:
+                        reads_lane = 2
+                except:
                     reads_lane = 2
 
-                if int(index_sample.split("s")[1]) <= 11:
-                    index_lane = 1
-                else:
+                try:
+                    if int(index_sample.split("s")[1]) <= 11:
+                        index_lane = 1
+                    else:
+                        index_lane = 2
+                except:
                     index_lane = 2
 
                 if reads_sample == index_sample:
