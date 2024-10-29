@@ -209,8 +209,6 @@ with open(output_file, "a") as fh:
                 writer.writerow(row)
             except Exception as e:
 
-                raise e
-                
                 if "list index out of range":
                     print(f"File {file} is still running")
                     continue
