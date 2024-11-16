@@ -114,7 +114,7 @@ def hopper_threshold(value):
     """
     if value <= 1:
         return "LIKELY_HOPPER"
-    elif value < 10:
+    elif value < 20:
         return "MAYBE_HOPPER"
     else:
         return "NOT_HOPPER"
