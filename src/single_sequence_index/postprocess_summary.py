@@ -106,7 +106,7 @@ headers = [
 ]
 
 input_file = "/home/labs/binford/taxon_confirmation_indexes/summary.csv"
-output_file = "/home/labs/binford/taxon_confirmation_indexes/summary.csv"
+output_file = "/home/labs/binford/taxon_confirmation_indexes/post_summary.csv"
 
 def hopper_threshold(value):
     """
@@ -126,6 +126,8 @@ reader = csv.DictReader(f, fieldnames=headers)
 
 for row in reader:
     existing_entry = index_to_rows.get(row["index_sample"], {})
+    print(existing_entry)
+    print(row["index_sample"])
     existing_entry[row["index_sample"]] = row
 
 
