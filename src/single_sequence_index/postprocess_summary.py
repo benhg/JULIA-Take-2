@@ -128,7 +128,9 @@ for row in reader:
     existing_entry = index_to_rows.get(row["index_sample"], {})
     print(existing_entry)
     print(row["index_sample"])
-    existing_entry[row["index_sample"]] = row
+    existing_entry[row["reads_sample"]] = row
+
+    index_to_rows[row["index_sample"]] = existing_entry
 
 
 for group in index_to_rows.values():
