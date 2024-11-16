@@ -121,12 +121,12 @@ def hopper_threshold(value):
 
 index_to_rows = {}
 
-with open(input_file, 'r') as f:
-    reader = csv.DictReader(f, fieldnames =headers)
+f = open(input_file, 'r')
+reader = csv.DictReader(f, fieldnames=headers)
 
 for row in reader:
     existing_entry = index_to_rows.get(row["index_sample"], {})
-    existing_entry[row["index_sample"]] = row
+    existing_entry[row["index_sample"]] = copy(row)
 
 
 for group in index_to_rows.values():
