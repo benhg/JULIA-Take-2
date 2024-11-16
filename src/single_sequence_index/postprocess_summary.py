@@ -164,7 +164,7 @@ for sequence, group in index_to_rows.items():
             aligned_taxon_auto = row["reads_taxon"]
     percent_reads_from_max = (max_aligned_num / total_single_aligned) * 100
     percent_reads_from_auto = (aligned_num_auto / total_single_aligned) * 100
-    threshold_metric = (percent_reads_from_auto / percent_reads_from_max)
+    threshold_metric = (percent_reads_from_auto / percent_reads_from_max) * 100
     summary_row = {
         "sequence_name": sequence,
         "source_index_taxon_labelled": sample_to_taxon[sequence_sample_label],
