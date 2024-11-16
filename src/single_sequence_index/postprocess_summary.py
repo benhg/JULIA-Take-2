@@ -126,7 +126,7 @@ reader = csv.DictReader(f, fieldnames=headers)
 
 for row in reader:
     existing_entry = index_to_rows.get(row["index_sample"], {})
-    existing_entry[row["index_sample"]] = copy(row)
+    existing_entry[row["index_sample"]] = row
 
 
 for group in index_to_rows.values():
