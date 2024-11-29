@@ -21,6 +21,9 @@ bowtie2 -f --threads 48 -x /home/labs/binford/taxon_confirmation_indexes/{}_inde
 
 
 def run_alignment(reads_sample_id, index_id):
+    if ("s002_c49540_g2_i5_m10591_LAZ_TRmerged" not in index_id):
+        return
+
     if int(reads_sample_id) <= 11:
         lane = 1
     else:
