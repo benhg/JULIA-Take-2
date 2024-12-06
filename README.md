@@ -104,11 +104,11 @@ The bowtie output files underneath `single_sample_index/s<0XX>/` contain an inde
 
 1. Identify sequences of interest, and the whole dataset
    a. usually a subset ~20%
+   b. Use the proteome alignment to suggest which are suspicious
 2. Run against raw reads from "true-auto" taxon
 3. Inspect 2. for suspicious levels of true-auto alignment (or lack thereof)
    a. apply automatic threshold here
 4. Run (1 \ 3) against all data (or at least all of one lane)
 5. Generate summary metrics and likely decision from before against results of 4.
    a. Denominator of this metric requires the total number of reads - could use from that lane, but may need to re-set the threshold for that
-
 

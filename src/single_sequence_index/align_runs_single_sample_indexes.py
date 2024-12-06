@@ -21,9 +21,6 @@ bowtie2 -f --threads 48 -x /home/labs/binford/taxon_confirmation_indexes/{}_inde
 
 
 def run_alignment(reads_sample_id, index_id):
-    if ("s002_c49540_g2_i5_m10591_LAZ_TRmerged" not in index_id):
-        return
-
     if int(reads_sample_id) <= 11:
         lane = 1
     else:
@@ -56,16 +53,5 @@ def run_all_intra_lane_samples():
             reads_sample_id = str(i).zfill(3)
             print(reads_sample_id, index_id)
             run_alignment(reads_sample_id, index_id)
-
-
-# pairs_to_run = [["016", "005"], ["005", "016"], ["022", "008"], ["008", "022"],
-#                 ["011", "021"], ["021", "011"], ["016", "001"], ["001", "016"],
-#                 ["016", "004"], ["004", "016"], ["018", "004"], ["004", "018"],
-#                 ["012", "008"], ["008", "012"], ["019", "008"], ["008", "019"]]
-
-#pairs_to_run = []
-
-#for pair in pairs_to_run:
-#    run_alignment(pair[0], pair[1])
 
 run_all_intra_lane_samples()
